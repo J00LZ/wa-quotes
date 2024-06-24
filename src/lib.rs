@@ -1,5 +1,6 @@
 use std::str::FromStr;
 
+use rust_xlsxwriter::XlsxSerialize;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -11,10 +12,13 @@ pub struct Message {
     pub content: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, XlsxSerialize)]
 pub struct QuoteMessage {
+    #[xlsx(rename = "Time")]
     pub time: chrono::NaiveDateTime,
+    #[xlsx(rename = "Sender")]
     pub sender: String,
+    #[xlsx(rename = "Quotes")]
     pub quotes: Vec<Quote>,
 }
 
