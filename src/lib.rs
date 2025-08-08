@@ -57,10 +57,13 @@ impl TryFrom<Message> for QuoteMessage {
         let mut quotes = vec![];
         for line in value.content.lines() {
             if let Some((quoted, quote)) = line.split_once(": \"") {
-                quotes.push(Quote {
-                    quoted: quoted.to_string().trim().to_string(),
-                    quote: quote[..quote.len() - 1].trim().to_string(),
-                });
+                let last_quote_index = quote.rfind('"');
+                if let Some(idx) = last_quote_index {
+                    quotes.push(Quote {
+                        quoted: quoted.to_string().trim().to_string(),
+                        quote: quote[..idx].trim().to_string(),
+                    });
+                }
             }
         }
         if quotes.is_empty() {

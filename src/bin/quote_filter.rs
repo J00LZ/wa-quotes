@@ -11,7 +11,7 @@ fn main() {
         File::create("quotes.json").unwrap(),
         &messages
             .into_iter()
-            .filter(|m| m.time > NaiveDate::from_ymd_opt(2023, 05, 21).unwrap().into())
+            .filter(|m| m.time > NaiveDate::from_ymd_opt(2024, 05, 21).unwrap().into())
             .filter(|m| m.content.len() < 100)
             .flat_map(|q| q.try_into().ok())
             .collect::<Vec<QuoteMessage>>(),
