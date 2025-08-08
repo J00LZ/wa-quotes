@@ -3,3 +3,5 @@ _chat.txt
 *.json
 out/
 output.png
+*.xlsx
+*.docx
